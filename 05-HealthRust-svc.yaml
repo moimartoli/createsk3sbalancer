@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: healthrust-svc
+spec:
+  selector:
+    app: healthrust
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
