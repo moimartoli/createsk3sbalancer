@@ -12,10 +12,11 @@ spec:
       labels:
         app: healthrust
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
       - name: healthrust
         image: moises:5000/healthrust
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         resources:
