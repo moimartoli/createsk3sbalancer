@@ -3,12 +3,29 @@ kind: Ingress
 metadata:
   name: ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/tls-acme: "true"
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    acme.cert-manager.io/http01-edit-in-place: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
+  tls: 
+  - hosts:
+    - moimartoli.duckdns.org
+    secretName: letsencrypt
+  - hosts:
+    - portfolio.martinezarranz.cat
+    secretName: letsencryptp
   rules:
-  - host: moimartoli.sytes.net
+  - host: moimartoli.duckdns.org
     http:
-      paths:    
+      paths:
+      - path: /odata
+        pathType: Prefix
+        backend:
+          service:
+            name: odata-svc
+            port:
+              number: 80
       - path: /health
         pathType: Prefix
         backend:
@@ -16,3 +33,26 @@ spec:
             name: healthrust-svc
             port:
               number: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: portfolio-svc
+            port:
+              number: 80
+  - host: portfolio.martinezarranz.cat
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: portfolio-svc
+            port:
+              number: 80
+
+#  tls:
+#    - secretName: letsencrypt
+#      hosts:
+#        - moimartoli.duckdns.org
+

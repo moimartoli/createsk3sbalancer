@@ -4,3 +4,6 @@ metadata:
   name: portfolio-config
   namespace: portfolio-ingress
 data:
+  proxy-connect-timeout: "10s"
+  proxy-read-timeout: "10s"
+  client-max-body-size: "2m"

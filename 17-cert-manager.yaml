@@ -1,0 +1,100 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"2"},"creationTimestamp":"2021-02-22T22:11:28Z","generation":3,"labels":{"app":"cert-manager","app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"cert-manager","app.kubernetes.io/name":"cert-manager"},"name":"cert-manager","namespace":"cert-manager","resourceVersion":"439864","uid":"bf544828-2656-4b8f-b3f5-c66da204b549"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"cert-manager","app.kubernetes.io/name":"cert-manager"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":"25%"},"type":"RollingUpdate"},"template":{"metadata":{"annotations":{"prometheus.io/path":"/metrics","prometheus.io/port":"9402","prometheus.io/scrape":"true"},"creationTimestamp":null,"labels":{"app":"cert-manager","app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"cert-manager","app.kubernetes.io/name":"cert-manager"}},"spec":{"containers":[{"args":["--v=2","--cluster-resource-namespace=$(POD_NAMESPACE)","--leader-election-namespace=kube-system"],"env":[{"name":"POD_NAMESPACE","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.namespace"}}}],"image":"quay.io/jetstack/cert-manager-controller:v1.1.1","imagePullPolicy":"IfNotPresent","name":"cert-manager","ports":[{"containerPort":9402,"protocol":"TCP"}],"resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","hostAliases":[{"hostnames":["moimartoli.duckdns.org","portfolio.martinezarranz.cat"],"ip":"192.168.0.60"}],"restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"serviceAccount":"cert-manager","serviceAccountName":"cert-manager","terminationGracePeriodSeconds":30}}},"status":{"availableReplicas":1,"conditions":[{"lastTransitionTime":"2021-02-22T22:11:47Z","lastUpdateTime":"2021-02-22T22:11:47Z","message":"Deployment has minimum availability.","reason":"MinimumReplicasAvailable","status":"True","type":"Available"},{"lastTransitionTime":"2021-02-22T22:11:28Z","lastUpdateTime":"2021-02-23T11:26:47Z","message":"ReplicaSet \"cert-manager-b574b5486\" has successfully progressed.","reason":"NewReplicaSetAvailable","status":"True","type":"Progressing"}],"observedGeneration":3,"readyReplicas":1,"replicas":1,"updatedReplicas":1}}
+  creationTimestamp: "2021-02-22T22:11:28Z"
+  generation: 4
+  labels:
+    app: cert-manager
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/name: cert-manager
+  name: cert-manager
+  namespace: cert-manager
+  resourceVersion: "451545"
+  uid: bf544828-2656-4b8f-b3f5-c66da204b549
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: cert-manager
+      app.kubernetes.io/name: cert-manager
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9402"
+        prometheus.io/scrape: "true"
+      creationTimestamp: null
+      labels:
+        app: cert-manager
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: cert-manager
+        app.kubernetes.io/name: cert-manager
+    spec:
+      containers:
+      - args:
+        - --v=2
+        - --cluster-resource-namespace=$(POD_NAMESPACE)
+        - --leader-election-namespace=kube-system
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: quay.io/jetstack/cert-manager-controller:v1.1.1
+        imagePullPolicy: IfNotPresent
+        name: cert-manager
+        ports:
+        - containerPort: 9402
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+#      hostAliases:
+#      - hostnames:
+#        - moimartoli.duckdns.org
+#        - portfolio.martinezarranz.cat
+#        ip: 192.168.0.60
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: cert-manager
+      serviceAccountName: cert-manager
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2021-02-22T22:11:47Z"
+    lastUpdateTime: "2021-02-22T22:11:47Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2021-02-22T22:11:28Z"
+    lastUpdateTime: "2021-02-23T11:26:47Z"
+    message: ReplicaSet "cert-manager-b574b5486" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 4
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
